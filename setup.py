@@ -22,11 +22,11 @@ from setuptools import setup
 from sentry_mattermost import VERSION
 
 setup(
-    name="sentry_mattermost",
+    name="sentry_mattermost_miare",
     version=VERSION,
-    author="Andre Freitas",
+    author="Andre Freitas and Miare Team",
     author_email="andre.freitas@ndrive.com",
-    description=("A Sentry plugin to send Mattermost notifications."),
+    description=("A Sentry plugin to send Mattermost notifications"),
     license="MIT",
     keywords="sentry mattermost devops",
     url="https://github.com/NDrive/sentry-mattermost",

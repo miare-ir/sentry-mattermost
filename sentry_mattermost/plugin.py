@@ -19,11 +19,9 @@
 # THE SOFTWARE.
 
 import json
-import urllib2
-import operator
+import urllib.request as url_request
 
 from django import forms
-from django.db.models import Q
 from sentry import tagstore
 from sentry.plugins.bases import notify
 
@@ -86,11 +84,10 @@ class PayloadFactory:
         }
         return payload
 
-
 def request(url, payload):
     data = "payload=" + json.dumps(payload)
-    req = urllib2.Request(url, data)
-    response = urllib2.urlopen(req)
+    req = url_request.Request(url, data)
+    response = url_request.urlopen(req)
     return response.read()
 
 
