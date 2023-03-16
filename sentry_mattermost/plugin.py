@@ -39,7 +39,7 @@ class MattermostPlugin(notify.NotificationPlugin):
                 'name': 'show_tags',
                 'label': 'Show tags',
                 'type': 'bool',
-                'rqeuired': False,
+                'required': False,
                 'help': 'Show event tags'
             }
         ]
@@ -74,7 +74,7 @@ class MattermostPlugin(notify.NotificationPlugin):
         title = event.title.encode('utf-8')
         error_message = event.message.encode('utf-8')
 
-        data.update({'title': title, 'project_name': project_name, 'link': notification_link, 'msg': error_message, 'culprit': group.cultrip})
+        data.update({'title': title, 'project_name': project_name, 'link': notification_link, 'msg': error_message, 'culprit': group.culprit})
 
         if self.get_option('show_tags', project):
             data['tags'] = event.get_tags()
