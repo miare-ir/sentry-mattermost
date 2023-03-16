@@ -53,7 +53,7 @@ class MattermostPlugin(notify.NotificationPlugin):
         if 'tags' in data:
             text += '| Tag | Value |\n'
             text += '|-----|-------|\n'
-            text += '\n'.join(['| %s | %s |' % tag for tag in data['tag']])
+            text += '\n'.join(['| %s | %s |' % tag for tag in data['tags']])
 
         return text
 
@@ -77,7 +77,7 @@ class MattermostPlugin(notify.NotificationPlugin):
         data.update({'title': title, 'project_name': project_name, 'link': notification_link, 'msg': error_message, 'culprit': group.culprit})
 
         if self.get_option('show_tags', project):
-            data['tags'] = event.get_tags()
+            data['tags'] = event.tags
 
         text = self.prepare_text(data)
 
