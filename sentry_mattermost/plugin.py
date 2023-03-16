@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import logging
+
 from sentry import http, tagstore
 from sentry.plugins.bases import notify
 from sentry.utils import json
@@ -11,13 +13,15 @@ class MattermostPlugin(notify.NotificationPlugin):
     title = 'Mattermost'
     slug = 'mattermost'
     author = 'Miare Team'
-    author_url = 'https://github.com/miare-ir'
+    author_url = 'https://github.com/miare-ir/sentry-mattermost'
     description = 'Post notifications to mattermost webhook'
     version = sentry_mattermost.VERSION
     resource_links = (
         ('Source', 'https://github.com/miare-ir/sentry-mattermost'),
     )
     conf_key = 'mattermost'
+
+    logger = logging.getLogger('sentry.plugins.sentry_mattermost_miare')
 
     def markdown_link(self, display, target_url):
         return f"[{display}]({target_url})"
@@ -79,7 +83,9 @@ class MattermostPlugin(notify.NotificationPlugin):
         if self.get_option('show_tags', project):
             data['tags'] = event.tags
 
+        self.logger.debug(f'preparing text using { data = }')
         text = self.prepare_text(data)
+        self.logger.debug('text has been prepared: %s' % text)
 
         return http.safe_urlopen(webhook_url, method='POST', data={
             'text': text,
