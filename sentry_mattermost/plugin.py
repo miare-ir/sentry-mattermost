@@ -54,6 +54,7 @@ class MattermostPlugin(notify.NotificationPlugin):
         text += f'# {data["title"]}\n'
         text += data['link'] + '\n'
         text += f'Culprit: {data["culprit"]}\n'
+        text += '\n'
 
         if 'tags' in data:
             text += '| Tag | Value |\n'
