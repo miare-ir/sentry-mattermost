@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import logging
+import json
 
 from sentry import http, tagstore
 from sentry.plugins.bases import notify
@@ -87,9 +88,9 @@ class MattermostPlugin(notify.NotificationPlugin):
         text = self.prepare_text(data)
         self.logger.debug('text has been prepared: %s' % text)
 
-        return http.safe_urlopen(webhook_url, method='POST', data={
+        return http.safe_urlopen(webhook_url, method='POST', data=json.dumps({
             'text': text,
             "icon_url": "https://myovchev.github.io/sentry-slack/images/logo32.png",
             "username": "Sentry",
-            })
+            }))
 
